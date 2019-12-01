@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 
-import {
-   Text, 
-   View,
+import { 
+   
    StyleSheet,
-   TextInput
+   TextInput,
+   Dimensions
 } from 'react-native';
 
-
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, View} from 'native-base';
 
 
 import QRCode from 'react-native-qrcode-svg';
@@ -16,56 +16,54 @@ import QRCode from 'react-native-qrcode-svg';
 
 class ViewQR extends Component {
 
-    state = {
-        text: 'http://facebook.github.io/react-native/',
-    };
+  state = {
+    text: 'http://facebook.github.io/react-native/',
+};
 
-    render() {
-      console.log("QR")
-      return(
-       <View style={styles.containerQR}>
-           <Text style={styles.QrText}> My QR Code</Text>
+  render() {
+    console.log("QR")
+    const {height: screenHeight} = Dimensions.get('window');
+    return (
+      <Container>
+        <Header>
+          <Left>
+            <Button transparent>
+              <Icon name='menu' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>My QR Code</Title>
+          </Body>
+          <Right />
+        </Header>
 
-            <TextInput
-                style={styles.input}
-                onChangeText={(text) => this.setState({text: text})}
-                value={this.state.text}
+        <Content>
+        <View style={{flex: 1, height: screenHeight, justifyContent: 'center', paddingLeft: 70, paddingBottom: 140}}>
+            
+          <QRCode size={250}  logoMargin={2}  logoBorderRadius={15} logoSize={30} 
+                value="www.qrcode-monkey.com"
                 />
+          
+          </View>
+        </Content>
 
-            <QRCode style={styles.QrLogo}
-                value="https://reactnativeforyou.com"
-                />
+        <Footer>
+          <FooterTab>
+            <Button full>
+              <Text>Footer</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
 
-       </View>
-      );
-    };
+      </Container>
+    );
+  }
+
   }
 
 
 const styles = StyleSheet.create({
-    containerQR:{
-      backgroundColor: '#1de5e8',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flex: 10,
-    },
   
-    QrText: {
-        textDecorationLine: 'underline',
-        fontWeight: 'bold',
-        color: '#1800d0',
-        fontSize: 30,
-    },
-
-    input: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        margin: 10,
-        borderRadius: 5,
-        padding: 5,
-    },
-
     QrLogo: {
         flex: 10,
         justifyContent: 'center',
@@ -79,5 +77,7 @@ const styles = StyleSheet.create({
 
   });
   
+
+ 
 
 export default ViewQR;

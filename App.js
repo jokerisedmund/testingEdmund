@@ -11,11 +11,11 @@ import RewardsNavi from './Src/Screens/RewardsNavi';
 import Settings from './Src/Screens/Settings';
 import Notify from './Src/Screens/Notify';
 
-import createBottomTabNavigator  from 'react-navigation-tabs';
-import SearchRewards from './Src/Screens/SearchRewards';
-import MyRewards from './Src/Screens/MyRewards'
-import createMaterialTopTabNavigator from 'react-native-tab-navigator';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+// import createBottomTabNavigator  from 'react-navigation-tabs';
+// import SearchRewards from './Src/Screens/SearchRewards';
+// import MyRewards from './Src/Screens/MyRewards'
+// import createMaterialTopTabNavigator from 'react-native-tab-navigator';
+// import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const AppNavigator = createStackNavigator({  
  MainApp: {screen: MainApp},
@@ -31,28 +31,6 @@ Notify: {screen: Notify}
   headerMode : 'none'
 })
 
-// from here 
-// const TabNavigator = createMaterialTopTabNavigator({
-//   SearchRewards: {
-//     screen: SearchRewards,
-//     navigationOptions: {
-//       tabBarLabel: 'Search',
-//     },
-//   },
-//   MyRewards: {
-//     screen: MyRewards,
-//     navigationOptions: {
-//       tabBarLabel: 'Purchase',
-//     },
-//   },
-
-  
-//  },
-//  {
-//   order : ["SearchRewards", "MyRewards"]
-// }
-//  );
-// to here
 
 
 const AppContainer = createAppContainer(AppNavigator) 

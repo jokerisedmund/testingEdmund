@@ -29,7 +29,9 @@ render() {
   return (
     <View style={{flex:1, margin: 10, backgroundColor:'white' }}>
       <Text style={styles.header}>Settings</Text>
-      <ChangePasswordController backgroundColor='white' submitText='Done' placeHolderCurrentPassword='Old Password' placeHolderNewPassword='New Password' placeHolderConfirmPassword='Confirm Password' />
+      <ChangePasswordController backgroundColor='white' submitText='Done'
+       placeHolderCurrentPassword='Old Password' placeHolderNewPassword='New Password' 
+       placeHolderConfirmPassword='Confirm Password' />
     </View>
   );
 }

@@ -10,6 +10,7 @@ import {
 import { 
     Container, 
     Header, 
+    Title,
     View, 
     DeckSwiper, 
     Card, 
@@ -19,7 +20,8 @@ import {
     Left, 
     Body, 
     Icon,
-    Button
+    Button,
+    
 } from 'native-base';
 
 const cards = [
@@ -49,7 +51,11 @@ class Notify extends React.Component {
       console.log("NOTI")
       return (
         <Container>
-            <Header />
+          <Header>
+           <Body>
+            <Title>Notification</Title>
+          </Body>
+            </Header >
             <View>
               <DeckSwiper
                 ref={(c) => this._deckSwiper = c}
@@ -90,8 +96,9 @@ class Notify extends React.Component {
                 </Button>
 
                 <Button iconRight onPress={() => this._deckSwiper._root.swipeRight()}>
-                  <Icon name="arrow-forward" />
+                  
                   <Text>Swipe Right</Text>
+                  <Icon name="arrow-forward" />
                 </Button>
             </View>
       </Container>

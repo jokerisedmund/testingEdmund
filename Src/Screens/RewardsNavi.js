@@ -16,7 +16,7 @@ class RewardsNavi extends React.Component {
 
         <Header hasTabs>
             <Left>
-              <Icons name ="chevron-thin-left" color ='white' size = {18}/>
+              <Icons name ="chevron-thin-left" color ='black' size = {18}/>
             </Left>
             <Body>
               <Text style={styles.header}>Reward Page</Text>

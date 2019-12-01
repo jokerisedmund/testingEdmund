@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import {
     AppRegistry,
     StyleSheet,
@@ -10,20 +11,29 @@ import {
     ListView,
     Keyboard,
     TextInput,
-    Alert
+    Alert,
+   
 } from 'react-native';
 
-// import { bindActionCreators } from 'redux'
-// import { connect } from 'react-redux'
-// import Firebase from '../config/Firebase'
-// import {  updatePassword } from '../actions/user'
+import PasswordInputText from 'react-native-hide-show-password-input';
 
+
+
+import firebase from 'react-native-firebase'
+var firebaseConfig = {
+  apiKey: "AIzaSyBfEHXWHWC9wXxiA8sb7uTSAG2bTtf4w74",
+  authDomain: "rewards-2a8c5.firebaseapp.com",
+  databaseURL: "https://rewards-2a8c5.firebaseio.com",
+  projectId: "rewards-2a8c5",
+  storageBucket: "rewards-2a8c5.appspot.com",
+  messagingSenderId: "689439198081",
+  appId: "1:689439198081:web:51583871eeeac38ac57680",
+  measurementId: "G-VM8GM6ZMPZ"
+};
 
 
 class ChangePasswordController extends Component {
-    /**
-     * Default props
-     */
+    
     static defaultProps = {   
         backgroundColor :"white",
         submitText:"Save",
@@ -32,83 +42,76 @@ class ChangePasswordController extends Component {
         placeHolderConfirmPassword:"Confirm Password"
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            newPassword: "",
-            currentPassword: "",
-            confirmPassword: ""
-        };
-    }
+     
+    constructor(props)
+    {
+        super(props)
 
-    /**
-     * Button Save pressed 
-     */
-    onbtnSavePress() {
-        if (this.state.currentPassword.trim().length == 0) {
-            console.log("Please enter current password");
-
-        } else if (this.state.newPassword.trim().length == 0) {
-            console.log("Please enter new password");
-            
-        } else if (this.state.newPassword != this.state.confirmPassword) {
-            console.log("Password dose not match");
-
-        } else {
-            Keyboard.dismiss();
-            this.changePassword();
+        this.state = { 
+            password: '',
+            // icon: "eye-off"
         }
+         firebase.initializeApp(firebaseConfig);
+        
     }
 
-    /**
-     * Call your webservice for update password
-     */
-    // reauthenticate = (currentPassword) => {
-
-        changePassword = () => {
-            // this.reauthenticate(this.state.currentPassword).then(() => {
-                
-            // })    
-            //     var users = firebasebase.auth().users;
-            //     users.updatePassword(this.state.newPassword).then(()=>{
-                    
-            //         Alert.alert("Password was changed");
-        
-            //     }).catch((error)=>{
-                    
-            //         Alert.alert(error.message);
-        
-            //     });
-
-
-            // }
-    }
+    onbtnSavePress = () => {
+       var ref = firebase.firestore().collection("users").doc("1jW7i38kQg16stfePez4");
     
+        ref.update({
+            password: this.state.password,
+            
+        })
+      }
 
-    //here 
-        // firebase.database().ref('users/ParkingFYP').update({
-        //     name : 'ParkingFYP';
-        // });
-    // here 
+    // _changeIcon(){
+    //     this.setState(prevState => ({
+    //         icon: prevState.icon ==='eye' ? 'eye-off' : 'eye',
+    //         password: !prevState.password
+    //     }));
+    // }
+
+  
 
     render() {
+
         console.log("PASSWORD")
+
+        const{icon, onChange} = this.props;
         return (
             <View style={styles.container}>
                 <View style={[styles.bottomView,{backgroundColor:this.props.backgroundColor}]}>
                     <View style={styles.inputView}>
-                        <TextInput style={styles.inputText} placeholder={this.props.placeHolderCurrentPassword}
-                            multiline={false} placeholderTextColor={"#3c3c3c"} autoCorrect={false} underlineColorAndroid={'transparent'}  secureTextEntry={true} onChangeText={(currentPassword) => this.setState({currentPassword})} value={this.state.currentPassword}></TextInput>
+                        <PasswordInputText style={styles.inputText} placeholder={this.props.placeHolderCurrentPassword}
+                            multiline={false} placeholderTextColor={"#3c3c3c"} autoCorrect={false}
+                            underlineColorAndroid={'transparent'}  secureTextEntry={true}
+                            onChangeText={(currentPassword) => this.setState({currentPassword})} 
+                            value={this.state.currentPassword} />
+
+                            {/* </TextInput> */}
+                            {/* <Icon name={this.state.icon} onPress={() => this._changeIcon()}/> */}
                     </View>
 
                     <View style={styles.inputView}>
-                        <TextInput style={styles.inputText} placeholder={this.props.placeHolderNewPassword}
-                            multiline={false} placeholderTextColor={"#3c3c3c"} autoCorrect={false} underlineColorAndroid={'transparent'}  secureTextEntry={true} onChangeText={(newPassword) => this.setState({newPassword})} value={this.state.newPassword}></TextInput>
+                        <PasswordInputText style={styles.inputText} placeholder={this.props.placeHolderNewPassword}
+                            multiline={false} placeholderTextColor={"#3c3c3c"} autoCorrect={false} 
+                            underlineColorAndroid={'transparent'}  secureTextEntry={true} 
+                            onChangeText={(password) => this.setState({password})} 
+                            value={this.state.password} />
+
+                            {/* </TextInput> */}
                     </View>
 
                     <View style={styles.inputView}>
-                        <TextInput style={styles.inputText} placeholder={this.props.placeHolderConfirmPassword}
-                            multiline={false} placeholderTextColor={"#3c3c3c"} autoCorrect={false} underlineColorAndroid={'transparent'}  secureTextEntry={true} onChangeText={(confirmPassword) => this.setState({confirmPassword})} value={this.state.confirmPassword}></TextInput>
+                        <PasswordInputText style={styles.inputText} placeholder={this.props.placeHolderConfirmPassword}
+                            multiline={false} placeholderTextColor={"#3c3c3c"} autoCorrect={false} 
+                            underlineColorAndroid={'transparent'}  secureTextEntry={true} 
+                            onChangeText={(confirmPassword) => this.setState({confirmPassword})}
+                             value={this.state.confirmPassword} />
+
+                             {/* </TextInput> */}
+
+                             
                     </View>
                     
                     <TouchableOpacity style={styles.btnSave} activeOpacity={0.6} onPress={() => this.onbtnSavePress()}>
@@ -116,7 +119,11 @@ class ChangePasswordController extends Component {
                             {this.props.submitText}</Text>
                     </TouchableOpacity>
                  </View>
+
+           
             </View>
+
+            
            
         );
     }
